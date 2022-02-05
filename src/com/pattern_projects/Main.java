@@ -1,6 +1,9 @@
 package com.pattern_projects;
 
 import java.io.File;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Main {
@@ -10,10 +13,23 @@ public class Main {
 
         while(true) {
             System.out.println("Input File Location:");
-            String path = scanner.nextLine();
+            String location = scanner.nextLine();
 
             //Using java.io.File
-            var file = new File(path);
+            var file = new File(location);
+
+            //Not Used
+                //Using java.nio
+                var path = Path.of(location);
+                var path2 = Paths.get(location);
+                var path3 = FileSystems.getDefault().getPath(location);
+
+                //From java.io.File to java.nio.Path
+                var pathFromFile = file.toPath();
+
+                //From java.nio.Path to java.io.File
+                var fileFromPath = path.toFile();
+            //end
 
             if (file.exists()) {
                 System.out.println("Path points to a " + ((file.isFile()) ? "file" : "directory") + ".");
